@@ -4,12 +4,16 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import type { Message, Session } from "@/types/chat";
 import MessageList from "./MessageList";
 import SessionHistory from "./SessionHistory";
+import { saveSession, exportAllSessions, downloadAsJson } from "@/lib/storage";
 
 export default function ChatInterface() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [sessionId, setSessionId] = useState<string | undefined>();
+  const [sessionStartedAt, setSessionStartedAt] = useState<
+    string | undefined
+  >();
   const [showHistory, setShowHistory] = useState(false);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -21,6 +25,18 @@ export default function ChatInterface() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Save session to localStorage whenever messages change
+  useEffect(() => {
+    if (sessionId && messages.length > 0) {
+      const session: Session = {
+        sessionId,
+        startedAt: sessionStartedAt || new Date().toISOString(),
+        messages,
+      };
+      saveSession(session);
+    }
+  }, [messages, sessionId, sessionStartedAt]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,7 +52,9 @@ export default function ChatInterface() {
       content: userMessage,
       timestamp: new Date().toISOString(),
     };
-    setMessages((prev) => [...prev, newUserMessage]);
+
+    const updatedMessages = [...messages, newUserMessage];
+    setMessages(updatedMessages);
 
     try {
       const response = await fetch("/api/chat", {
@@ -45,6 +63,7 @@ export default function ChatInterface() {
         body: JSON.stringify({
           message: userMessage,
           sessionId,
+          conversationHistory: messages, // Send existing conversation history
         }),
       });
 
@@ -57,6 +76,7 @@ export default function ChatInterface() {
       // Update session ID if new
       if (!sessionId) {
         setSessionId(data.sessionId);
+        setSessionStartedAt(new Date().toISOString());
       }
 
       // Add therapist response
@@ -87,14 +107,22 @@ export default function ChatInterface() {
 
   const handleSelectSession = useCallback((session: Session) => {
     setSessionId(session.sessionId);
+    setSessionStartedAt(session.startedAt);
     setMessages(session.messages);
   }, []);
 
   const handleNewSession = useCallback(() => {
     setSessionId(undefined);
+    setSessionStartedAt(undefined);
     setMessages([]);
     inputRef.current?.focus();
   }, []);
+
+  const handleExportAll = () => {
+    const data = exportAllSessions();
+    const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+    downloadAsJson(data, `all-sessions-${timestamp}.json`);
+  };
 
   return (
     <div className="flex flex-col h-screen bg-gradient-to-b from-stone-100 to-stone-200">
@@ -102,7 +130,7 @@ export default function ChatInterface() {
       <header className="bg-white/80 backdrop-blur-sm border-b border-stone-200 px-4 py-3 flex items-center justify-between">
         <button
           onClick={() => setShowHistory(true)}
-          className="p-2 rounded-xl hover:bg-stone-100 transition-colors text-stone-600"
+          className="p-2 rounded-xl hover:bg-stone-100 transition-colors text-stone-600 cursor-pointer"
           title="View sessions"
         >
           <svg
@@ -130,7 +158,7 @@ export default function ChatInterface() {
 
         <button
           onClick={handleNewSession}
-          className="p-2 rounded-xl hover:bg-stone-100 transition-colors text-stone-600"
+          className="p-2 rounded-xl hover:bg-stone-100 transition-colors text-stone-600 cursor-pointer"
           title="New session"
         >
           <svg
@@ -180,7 +208,7 @@ export default function ChatInterface() {
             <button
               type="submit"
               disabled={!input.trim() || isLoading}
-              className="p-2.5 rounded-xl bg-stone-800 text-white disabled:opacity-40 disabled:cursor-not-allowed hover:bg-stone-700 transition-colors"
+              className="p-2.5 rounded-xl bg-stone-800 text-white disabled:opacity-40 disabled:cursor-not-allowed hover:bg-stone-700 transition-colors cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -207,6 +235,7 @@ export default function ChatInterface() {
         onClose={() => setShowHistory(false)}
         onSelectSession={handleSelectSession}
         onNewSession={handleNewSession}
+        onExportAll={handleExportAll}
         currentSessionId={sessionId}
       />
     </div>

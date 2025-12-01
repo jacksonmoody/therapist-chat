@@ -2,17 +2,12 @@
 
 import { useEffect, useState } from "react";
 import type { Session } from "@/types/chat";
-
-interface SessionSummary {
-  sessionId: string;
-  startedAt: string;
-  messageCount: number;
-  filename: string;
-}
+import { getAllSessions, exportSession, downloadAsJson } from "@/lib/storage";
 
 interface SessionHistoryProps {
   onSelectSession: (session: Session) => void;
   onNewSession: () => void;
+  onExportAll: () => void;
   currentSessionId?: string;
   isOpen: boolean;
   onClose: () => void;
@@ -21,51 +16,44 @@ interface SessionHistoryProps {
 export default function SessionHistory({
   onSelectSession,
   onNewSession,
+  onExportAll,
   currentSessionId,
   isOpen,
   onClose,
 }: SessionHistoryProps) {
-  const [sessions, setSessions] = useState<SessionSummary[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [loadingSession, setLoadingSession] = useState<string | null>(null);
+  const [sessions, setSessions] = useState<Session[]>([]);
 
   useEffect(() => {
     if (isOpen) {
-      fetchSessions();
+      loadSessions();
     }
   }, [isOpen]);
 
-  const fetchSessions = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch("/api/sessions");
-      const data = await response.json();
-      setSessions(data.sessions || []);
-    } catch (error) {
-      console.error("Failed to fetch sessions:", error);
-    } finally {
-      setLoading(false);
-    }
+  const loadSessions = () => {
+    const allSessions = getAllSessions();
+    // Sort by date, newest first
+    allSessions.sort(
+      (a, b) =>
+        new Date(b.startedAt).getTime() - new Date(a.startedAt).getTime()
+    );
+    setSessions(allSessions);
   };
 
-  const handleSelectSession = async (sessionId: string) => {
-    if (sessionId === currentSessionId) {
+  const handleSelectSession = (session: Session) => {
+    if (session.sessionId === currentSessionId) {
       onClose();
       return;
     }
+    onSelectSession(session);
+    onClose();
+  };
 
-    setLoadingSession(sessionId);
-    try {
-      const response = await fetch(`/api/sessions/${sessionId}`);
-      const data = await response.json();
-      if (data.session) {
-        onSelectSession(data.session);
-        onClose();
-      }
-    } catch (error) {
-      console.error("Failed to load session:", error);
-    } finally {
-      setLoadingSession(null);
+  const handleExportSession = (e: React.MouseEvent, sessionId: string) => {
+    e.stopPropagation();
+    const data = exportSession(sessionId);
+    if (data) {
+      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+      downloadAsJson(data, `session-${timestamp}.json`);
     }
   };
 
@@ -113,7 +101,7 @@ export default function SessionHistory({
             <h2 className="text-lg font-serif text-stone-800">Sessions</h2>
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg hover:bg-stone-100 transition-colors text-stone-500"
+              className="p-1.5 rounded-lg hover:bg-stone-100 transition-colors text-stone-500 cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -131,42 +119,58 @@ export default function SessionHistory({
               </svg>
             </button>
           </div>
-          <button
-            onClick={() => {
-              onNewSession();
-              onClose();
-            }}
-            className="w-full py-2.5 px-4 bg-stone-800 text-white rounded-xl font-medium hover:bg-stone-700 transition-colors flex items-center justify-center gap-2"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          <div className="flex gap-2">
+            <button
+              onClick={() => {
+                onNewSession();
+                onClose();
+              }}
+              className="flex-1 py-2.5 px-4 bg-stone-800 text-white rounded-xl font-medium hover:bg-stone-700 transition-colors flex items-center justify-center gap-2 cursor-pointer"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 4v16m8-8H4"
-              />
-            </svg>
-            New Session
-          </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 4v16m8-8H4"
+                />
+              </svg>
+              New
+            </button>
+            <button
+              onClick={onExportAll}
+              disabled={sessions.length === 0}
+              className="py-2.5 px-4 bg-stone-200 text-stone-700 rounded-xl font-medium hover:bg-stone-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
+              title="Export all sessions"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                />
+              </svg>
+              Export All
+            </button>
+          </div>
         </div>
 
         {/* Session List */}
         <div className="flex-1 overflow-y-auto p-3">
-          {loading ? (
-            <div className="flex items-center justify-center py-8 text-stone-500">
-              <div className="flex gap-1">
-                <span className="w-2 h-2 bg-stone-400 rounded-full animate-bounce [animation-delay:-0.3s]" />
-                <span className="w-2 h-2 bg-stone-400 rounded-full animate-bounce [animation-delay:-0.15s]" />
-                <span className="w-2 h-2 bg-stone-400 rounded-full animate-bounce" />
-              </div>
-            </div>
-          ) : sessions.length === 0 ? (
+          {sessions.length === 0 ? (
             <div className="text-center py-8 text-stone-500">
               <div className="text-3xl mb-2 opacity-50">📝</div>
               <p className="text-sm">No previous sessions</p>
@@ -174,35 +178,60 @@ export default function SessionHistory({
           ) : (
             <div className="space-y-2">
               {sessions.map((session) => (
-                <button
+                <div
                   key={session.sessionId}
-                  onClick={() => handleSelectSession(session.sessionId)}
-                  disabled={loadingSession === session.sessionId}
-                  className={`w-full text-left p-3 rounded-xl transition-all ${
+                  onClick={() => handleSelectSession(session)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      handleSelectSession(session);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  className={`w-full text-left p-3 rounded-xl transition-all cursor-pointer ${
                     currentSessionId === session.sessionId
                       ? "bg-stone-200 border-stone-300"
                       : "bg-white hover:bg-stone-100 border-stone-200"
-                  } border`}
+                  } border group`}
                 >
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-xs text-stone-500 font-medium">
                       {formatDate(session.startedAt)}
                     </span>
-                    {currentSessionId === session.sessionId && (
-                      <span className="text-xs bg-stone-800 text-white px-2 py-0.5 rounded-full">
-                        Current
-                      </span>
-                    )}
+                    <div className="flex items-center gap-1">
+                      {currentSessionId === session.sessionId && (
+                        <span className="text-xs bg-stone-800 text-white px-2 py-0.5 rounded-full">
+                          Current
+                        </span>
+                      )}
+                      <button
+                        onClick={(e) => handleExportSession(e, session.sessionId)}
+                        className="p-1 rounded-lg opacity-0 group-hover:opacity-100 hover:bg-stone-200 transition-all text-stone-500 cursor-pointer"
+                        title="Export this session"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                          />
+                        </svg>
+                      </button>
+                    </div>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-sm text-stone-700">
-                      {session.messageCount} messages
+                      {session.messages.length} messages
                     </span>
-                    {loadingSession === session.sessionId && (
-                      <span className="text-xs text-stone-500">Loading...</span>
-                    )}
                   </div>
-                </button>
+                </div>
               ))}
             </div>
           )}
@@ -211,4 +240,3 @@ export default function SessionHistory({
     </>
   );
 }
-
