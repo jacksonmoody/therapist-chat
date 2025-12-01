@@ -1,0 +1,173 @@
+{
+  "sessionId": "fp52mql90e9",
+  "startedAt": "2025-12-01T02:07:55.977Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hello! I'm very stressed out right now because I feel very sad about applying to PhD applications.",
+      "timestamp": "2025-12-01T02:07:55.977Z"
+    },
+    {
+      "role": "therapist",
+      "content": "It's understandable to feel stressed out and sad when facing something as significant as PhD applications. Could you share more about what's been particularly challenging or upsetting about the application process for you? Applying to PhD programs can be an overwhelming experience due to the high expectations and uncertainty involved. It's normal to feel this way, as many others in similar situations experience these emotions too. Sometimes it helps to break down the process into smaller, manageable steps, focusing on one thing at a time. Have you tried any strategies that work for you when dealing with stress? Remember, self-compassion is important during this time. Acknowledging your efforts and the courage it takes to pursue your goals can be empowering.",
+      "timestamp": "2025-12-01T02:08:00.990Z",
+      "segments": [
+        {
+          "text": "It's understandable to feel stressed out and sad when facing something as significant as PhD applications.",
+          "strategies": [
+            "validation",
+            "empathy"
+          ]
+        },
+        {
+          "text": "Could you share more about what's been particularly challenging or upsetting about the application process for you?",
+          "strategies": [
+            "open_ended_questions",
+            "active_listening"
+          ]
+        },
+        {
+          "text": "Applying to PhD programs can be an overwhelming experience due to the high expectations and uncertainty involved. It's normal to feel this way, as many others in similar situations experience these emotions too.",
+          "strategies": [
+            "normalization",
+            "empathy"
+          ]
+        },
+        {
+          "text": "Sometimes it helps to break down the process into smaller, manageable steps, focusing on one thing at a time. Have you tried any strategies that work for you when dealing with stress?",
+          "strategies": [
+            "cognitive_reframing",
+            "open_ended_questions"
+          ]
+        },
+        {
+          "text": "Remember, self-compassion is important during this time. Acknowledging your efforts and the courage it takes to pursue your goals can be empowering.",
+          "strategies": [
+            "empathy",
+            "cognitive_reframing"
+          ]
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "I'm scared I'm gonna end up on the wrong path in life. I feel like a not insignificant chunk of my applications are programs where I have a decent shot at getting in, but that's likely attributed to the fact that their faculty in question are as technical, but I feel like applying to technical programs is a long-shot when I don't have as much have a pure technical background.",
+      "timestamp": "2025-12-01T02:09:30.572Z"
+    },
+    {
+      "role": "therapist",
+      "content": "It sounds like you're experiencing a lot of worry about the future and the direction your life might take, which is a common concern when making significant decisions like applying to PhD programs. Feeling uncertain about whether you're on the right path is a normal part of the decision-making process. It's understandable to be concerned about applying to programs where you don't perceive yourself as having the exact background they might be looking for. What aspects of these technical programs appeal to you, and how do you see them fitting into your broader career goals? Exploring what draws you to them might help clarify your feelings around applying to these programs. It's important to remember that many academic programs value diverse backgrounds and unique perspectives. You might bring skills or insights from your own experiences that aren't strictly technical but equally valuable. When you're feeling overwhelmed by concerns of taking the wrong path, it might help to consider that most paths can lead to fulfilling areas, even if they're different from what you originally envisioned. Finding your path is often more about exploration and growth along the way than adhering to a strict plan from the outset.",
+      "timestamp": "2025-12-01T02:09:35.026Z",
+      "segments": [
+        {
+          "text": "It sounds like you're experiencing a lot of worry about the future and the direction your life might take, which is a common concern when making significant decisions like applying to PhD programs.",
+          "strategies": [
+            "active_listening",
+            "empathy"
+          ]
+        },
+        {
+          "text": "Feeling uncertain about whether you're on the right path is a normal part of the decision-making process. It's understandable to be concerned about applying to programs where you don't perceive yourself as having the exact background they might be looking for.",
+          "strategies": [
+            "validation",
+            "normalization"
+          ]
+        },
+        {
+          "text": "What aspects of these technical programs appeal to you, and how do you see them fitting into your broader career goals? Exploring what draws you to them might help clarify your feelings around applying to these programs.",
+          "strategies": [
+            "open_ended_questions",
+            "reflection"
+          ]
+        },
+        {
+          "text": "It's important to remember that many academic programs value diverse backgrounds and unique perspectives. You might bring skills or insights from your own experiences that aren't strictly technical but equally valuable.",
+          "strategies": [
+            "cognitive_reframing",
+            "normalization"
+          ]
+        },
+        {
+          "text": "When you're feeling overwhelmed by concerns of taking the wrong path, it might help to consider that most paths can lead to fulfilling areas, even if they're different from what you originally envisioned. Finding your path is often more about exploration and growth along the way than adhering to a strict plan from the outset.",
+          "strategies": [
+            "cognitive_reframing",
+            "normalization"
+          ]
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "The right path to me feels like being able to grow technically and being able to make an impact. I feel like I need the former to do the latter.",
+      "timestamp": "2025-12-01T02:10:09.732Z"
+    },
+    {
+      "role": "therapist",
+      "content": "It's deeply meaningful that you're focused on growth and making an impact—those are powerful motivators. It's understandable that you see technical growth as a pathway to making a difference, and it's great that you've identified what's important to you.  Could you share more about the areas or projects where you hope to make an impact? Understanding what specific contributions you want to make might help clarify the steps you need to take to get there. While it's true that technical expertise can be crucial, remember that impact often comes from a blend of skills, including communication, collaboration, and creativity. These qualities can be developed in various ways, not just through formal technical training.  Have you noticed moments in the past where you've made an impact, even if they weren't technically oriented? Reflecting on these experiences might provide useful insights into how you can leverage your existing skills to achieve your goals.",
+      "timestamp": "2025-12-01T02:10:13.231Z",
+      "segments": [
+        {
+          "text": "It's deeply meaningful that you're focused on growth and making an impact—those are powerful motivators. It's understandable that you see technical growth as a pathway to making a difference, and it's great that you've identified what's important to you. ",
+          "strategies": [
+            "empathy",
+            "validation"
+          ]
+        },
+        {
+          "text": "Could you share more about the areas or projects where you hope to make an impact? Understanding what specific contributions you want to make might help clarify the steps you need to take to get there.",
+          "strategies": [
+            "open_ended_questions",
+            "active_listening"
+          ]
+        },
+        {
+          "text": "While it's true that technical expertise can be crucial, remember that impact often comes from a blend of skills, including communication, collaboration, and creativity. These qualities can be developed in various ways, not just through formal technical training. ",
+          "strategies": [
+            "cognitive_reframing",
+            "psychoeducation"
+          ]
+        },
+        {
+          "text": "Have you noticed moments in the past where you've made an impact, even if they weren't technically oriented? Reflecting on these experiences might provide useful insights into how you can leverage your existing skills to achieve your goals.",
+          "strategies": [
+            "reflection",
+            "normalization"
+          ]
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "This is good to reflect on. Thank you.",
+      "timestamp": "2025-12-01T02:11:00.190Z"
+    },
+    {
+      "role": "therapist",
+      "content": "I'm glad to hear that reflection could be helpful for you. It shows a lot of awareness to pause and consider different aspects of your journey.  If any new thoughts or feelings come up while you're reflecting, I'm here to listen and explore them with you.  Taking time to understand yourself better can be a powerful step forward, and I'm here to support you along the way. ",
+      "timestamp": "2025-12-01T02:11:02.773Z",
+      "segments": [
+        {
+          "text": "I'm glad to hear that reflection could be helpful for you. It shows a lot of awareness to pause and consider different aspects of your journey. ",
+          "strategies": [
+            "reflection",
+            "validation"
+          ]
+        },
+        {
+          "text": "If any new thoughts or feelings come up while you're reflecting, I'm here to listen and explore them with you. ",
+          "strategies": [
+            "active_listening",
+            "open_ended_questions"
+          ]
+        },
+        {
+          "text": "Taking time to understand yourself better can be a powerful step forward, and I'm here to support you along the way. ",
+          "strategies": [
+            "empathy",
+            "normalization"
+          ]
+        }
+      ]
+    }
+  ]
+}
