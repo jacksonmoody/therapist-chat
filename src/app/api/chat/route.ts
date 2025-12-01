@@ -109,7 +109,7 @@ export async function POST(request: NextRequest) {
     // Call OpenAI with structured output
     const openai = getOpenAIClient();
     const response = await openai.chat.completions.create({
-      model: "gpt-4o-2024-08-06",
+      model: "gpt-5.1-2025-11-13",
       messages: [
         { role: "system", content: SYSTEM_PROMPT },
         ...messages,
