@@ -1,0 +1,126 @@
+{
+  "sessionId": "n2lteyu9uc",
+  "startedAt": "2025-12-01T01:07:10.638Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "I am feeling sad today",
+      "timestamp": "2025-12-01T01:07:10.638Z"
+    },
+    {
+      "role": "therapist",
+      "content": "I'm sorry to hear that you're feeling sad today. Would you like to share more about what's been going on?",
+      "timestamp": "2025-12-01T01:07:12.440Z",
+      "segments": [
+        {
+          "text": "I'm sorry to hear that you're feeling sad today.",
+          "strategies": [
+            "active_listening"
+          ]
+        },
+        {
+          "text": "Would you like to share more about what's been going on?",
+          "strategies": [
+            "open_ended_questions"
+          ]
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Yeah I am really stressed because I have two big projects due tomorrow that are worth a lot of my grade",
+      "timestamp": "2025-12-01T01:10:58.833Z"
+    },
+    {
+      "role": "therapist",
+      "content": "It sounds like you're under a lot of pressure with those deadlines coming up. That can be really overwhelming. How have you been managing your time and stress so far with these projects?",
+      "timestamp": "2025-12-01T01:11:00.994Z",
+      "segments": [
+        {
+          "text": "It sounds like you're under a lot of pressure with those deadlines coming up. That can be really overwhelming.",
+          "strategies": [
+            "active_listening",
+            "validation",
+            "empathy"
+          ]
+        },
+        {
+          "text": "How have you been managing your time and stress so far with these projects?",
+          "strategies": [
+            "open_ended_questions",
+            "reflection"
+          ]
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "I have just been procrastinating becuase I have had a lot going on.",
+      "timestamp": "2025-12-01T01:11:22.549Z"
+    },
+    {
+      "role": "therapist",
+      "content": "It sounds like there's been a lot on your plate lately, and procrastination can sometimes be our way of coping when things feel too much.  It’s understandable to feel overwhelmed when you have multiple responsibilities.  What do you think might help you break things down into smaller, more manageable tasks? Sometimes, setting small goals and rewarding ourselves with breaks can ease the process. What do you think about that approach?",
+      "timestamp": "2025-12-01T01:11:25.893Z",
+      "segments": [
+        {
+          "text": "It sounds like there's been a lot on your plate lately, and procrastination can sometimes be our way of coping when things feel too much. ",
+          "strategies": [
+            "empathy",
+            "normalization"
+          ]
+        },
+        {
+          "text": "It’s understandable to feel overwhelmed when you have multiple responsibilities. ",
+          "strategies": [
+            "validation"
+          ]
+        },
+        {
+          "text": "What do you think might help you break things down into smaller, more manageable tasks?",
+          "strategies": [
+            "open_ended_questions"
+          ]
+        },
+        {
+          "text": "Sometimes, setting small goals and rewarding ourselves with breaks can ease the process. What do you think about that approach?",
+          "strategies": [
+            "cognitive_reframing"
+          ]
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "I think that sounds good!",
+      "timestamp": "2025-12-01T01:11:37.828Z"
+    },
+    {
+      "role": "therapist",
+      "content": "I'm glad to hear that breaking tasks down feels like a good approach for you. Recognizing a strategy that resonates with you is an important step. Is there a specific small task or first step you're thinking of starting with? Sometimes having a clear starting point can make the larger task feel less daunting. Remember, it's okay to take things one step at a time. Giving yourself permission to do so can also help alleviate some pressure.",
+      "timestamp": "2025-12-01T01:11:40.202Z",
+      "segments": [
+        {
+          "text": "I'm glad to hear that breaking tasks down feels like a good approach for you. Recognizing a strategy that resonates with you is an important step.",
+          "strategies": [
+            "active_listening",
+            "validation"
+          ]
+        },
+        {
+          "text": "Is there a specific small task or first step you're thinking of starting with? Sometimes having a clear starting point can make the larger task feel less daunting.",
+          "strategies": [
+            "open_ended_questions"
+          ]
+        },
+        {
+          "text": "Remember, it's okay to take things one step at a time. Giving yourself permission to do so can also help alleviate some pressure.",
+          "strategies": [
+            "empathy",
+            "normalization"
+          ]
+        }
+      ]
+    }
+  ]
+}
